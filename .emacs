@@ -54,3 +54,24 @@
 
 (global-set-key "\C-x\C-t" 'point-to-top)
 (global-set-key "\C-x\C-d" 'point-to-down)
+
+(defun read-only-if-symlink ()
+  "Read only symlinks."
+  (if (file-symlink-p buffer-file-name)
+      (progn
+	(setq buffer-read-only t)
+	(message "File is a symlink."))))
+
+(defun delete-unlynked-symbolic ()
+  "Delete the unlynked symbolic."
+  (if (file-symlink-p buffer-file-name)
+      (let ((symb-name buffer-file-name)
+	    (orig-file (file-symlink-p buffer-file-name)))
+	(if (file-exists-p orig-file)
+	    (read-only-if-symlink)
+	  (progn
+	    (delete-file symb-name)
+	    (kill-buffer symb-name)
+	    (message "Deleted unlinked symlink."))))))
+
+(add-hook 'find-file-hook 'delete-unlynked-symbolic)
