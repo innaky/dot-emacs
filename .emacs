@@ -21,18 +21,18 @@
   (other-window (- (prefix-numeric-value n))))
 
 ;; Scroll lines
-(defun scroll-n-lines-up ()
+(defun scroll-n-lines-up (&optional n)
   "Scroll up N lines (1 by default)."
   (interactive "P")
   (scroll-up (prefix-numeric-value n)))
 
-(defun scroll-n-lines-down ()
+(defun scroll-n-lines-down (&optional n)
   "Scroll down N lines (1 by default)."
   (interactive "P")
   (scroll-down (prefix-numeric-value n)))
 
 (global-set-key "\C-q" 'scroll-n-lines-up)
-(global-set-key "\C-z" 'scroll-n-lines-donw)
+(global-set-key "\C-z" 'scroll-n-lines-down)
 
 ;; Insert special characters (C-x C-q 361)
 (global-set-key "\C-x\C-q" 'quoted-insert)
@@ -55,6 +55,7 @@
 (global-set-key "\C-x\C-t" 'point-to-top)
 (global-set-key "\C-x\C-d" 'point-to-down)
 
+;; Symlink procedure
 (defun read-only-if-symlink ()
   "Read only symlinks."
   (if (file-symlink-p buffer-file-name)
@@ -75,3 +76,13 @@
 	    (message "Deleted unlinked symlink."))))))
 
 (add-hook 'find-file-hook 'delete-unlynked-symbolic)
+
+;; only buffer names
+(defadvice switch-to-buffer (before existing-buffer
+				    activate compile)
+  "When interactive, switch to existing buffers only,
+unless given a prefix argument."
+  (interactive
+   (list (read-buffer "Switch to buffer:"
+		      (other-buffer)
+		      (null current-prefix-arg)))))
