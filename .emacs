@@ -10,6 +10,14 @@
 (ac-config-default)
 (global-auto-complete-mode t)
 
+;; Slime auto-complete
+;; is necesary previously auto-complete and slime
+;; package-install ac-slime
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'slime-repl-mode))
+
 (setq backup-directory-alist `(("." . "~/.saves")))
 (display-time)
 
