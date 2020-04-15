@@ -1,10 +1,14 @@
-(package-initialize)
+(setq package-check-signature nil)
 
 (require 'package)
 (add-to-list 'package-archives
-	     (quote
-	      (("melpa" . "http://stable.melpa.org/pacakges/")
-	       ("gnu" . "https://elpa.gnu.org/packages/"))))
+	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+
+;; package-refresh-contents
+;; package-install auto-complete
+(ac-config-default)
+(global-auto-complete-mode t)
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 (display-time)
