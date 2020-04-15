@@ -11,7 +11,7 @@
 (global-auto-complete-mode t)
 
 ;; Slime auto-complete
-;; is necesary previously auto-complete and slime
+;; is necessary previously auto-complete and slime
 ;; package-install ac-slime
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
@@ -23,6 +23,12 @@
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
+
+;; Themes (cli and gtk)
+;; packages: solarized-theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'solarized-ligth t)
+;; or (load-theme RET solarized-dark) instant charge
 
 (global-set-key "\C-x\C-n" 'other-window)
 (global-set-key "\C-x\C-p" 'other-window-backward)
