@@ -10,6 +10,9 @@
 (ac-config-default)
 (global-auto-complete-mode t)
 
+;; Parens!!
+(show-paren-mode t)
+
 ;; Slime auto-complete
 ;; is necessary previously auto-complete and slime
 ;; package-install ac-slime
