@@ -10,8 +10,11 @@
 (ac-config-default)
 (global-auto-complete-mode t)
 
-;; Parens!!
+;; Parens hightligh matching!
 (show-paren-mode t)
+
+;; Lisp indentation
+(global-set-key [C-tab] 'lisp-indent-line)
 
 ;; Slime auto-complete
 ;; is necessary previously auto-complete and slime
