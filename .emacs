@@ -36,6 +36,7 @@
 (load-theme 'solarized-ligth t)
 ;; or (load-theme RET solarized-dark) instant charge
 
+(global-set-key (kbd "C-x r") 'replace-string)
 (global-set-key "\C-x\C-n" 'other-window)
 (global-set-key "\C-x\C-p" 'other-window-backward)
 
